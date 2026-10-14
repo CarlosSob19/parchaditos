@@ -1,0 +1,10 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "parchaditos", "runtimeExecutable": "python", "runtimeArgs": ["-c", "import os,sys,runpy; sys.argv=['http.server', os.environ.get('PORT','5173'), '--directory', 'web']; runpy.run_module('http.server', run_name='__main__')"], "port": 5173, "autoPort": true },
+    { "name": "parchaditos-app", "runtimeExecutable": "npx", "runtimeArgs": ["expo", "start", "--web", "--port", "8082"], "cwd": "mobile", "port": 8082 },
+    { "name": "beautystore", "runtimeExecutable": "python", "runtimeArgs": ["-m", "http.server", "5180", "--directory", "C:/VsCode/Beauty store"], "port": 5180 },
+    { "name": "beautystore-php", "url": "http://localhost:8090", "port": 8090 },
+    { "name": "equilibrio", "runtimeExecutable": "node", "runtimeArgs": ["C:/VsCode/Ortodoncia/Equilibrio Dental & Facial (Dra. Mildred Galvis Aragón)/node_modules/next/dist/bin/next", "dev", "C:/VsCode/Ortodoncia/Equilibrio Dental & Facial (Dra. Mildred Galvis Aragón)", "-p", "3100"], "port": 3100 }
+  ]
+}

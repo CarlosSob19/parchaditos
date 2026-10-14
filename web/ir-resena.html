@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Déjanos tu reseña | Parchaditos</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0a0606">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="/assets/favicon.svg?v=2" type="image/svg+xml">
+  <style>
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #0a0606; color: #f5ece8; font: 16px/1.5 system-ui, sans-serif; text-align: center; padding: 24px; box-sizing: border-box; }
+    a { color: #fff; background: #e3120b; padding: 12px 22px; border-radius: 999px; text-decoration: none; font-weight: 700; display: inline-block; margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <!-- Destino del QR /resena (impreso en la cuenta o en la salida). Solo depende de config.js,
+       para que un cambio en el resto de la web no lo rompa. El enlace va en INFO.resenas. -->
+  <main>
+    <p>Llevándote a Google para dejar tu reseña…</p>
+    <a href="/" id="go">Ir a Parchaditos</a>
+  </main>
+  <script src="/js/config.js"></script>
+  <script>
+    (function () {
+      var url = "";
+      try { url = INFO.resenas || ""; } catch (e) {}
+      if (/^https?:\/\//i.test(url)) {
+        document.getElementById("go").href = url;
+        document.getElementById("go").textContent = "Abrir Google";
+        location.replace(url);
+      } else {
+        location.replace("/");
+      }
+    })();
+  </script>
+</body>
+</html>

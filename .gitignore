@@ -1,0 +1,14 @@
+node_modules/
+.env*
+!.env.example
+.wrangler/
+.vercel/
+.next/
+dist/
+out/
+graphify-out/
+.impeccable/
+.playwright-cli/
+*.log
+.claude/settings.local.json
+.expo/

@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Parchaditos | Licores, Vapes, Hookah y Zonas VIP</title>
+  <meta name="description" content="Licores, vapes, blunt wraps, granizados, hookah y zonas VIP con reserva. Solo mayores de 18 años.">
+  <meta name="theme-color" content="#0a0606">
+  <meta name="color-scheme" content="dark">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Parchaditos | Licores, Vapes, Hookah y Zonas VIP">
+  <meta property="og:description" content="Licores, vapes, hookah y dos zonas VIP con reserva. Solo mayores de 18 años.">
+  <meta property="og:locale" content="es_CO">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png?v=2" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=2">
+  <meta property="og:image" content="https://TU-DOMINIO.com/assets/og.jpg">
+  <link rel="manifest" href="site.webmanifest?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/signo.woff2?v=2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/styles.css?v=20261006172043">
+  <link rel="stylesheet" href="css/mesa.css?v=20261006172043">
+  <script>
+    // Transiciones nativas entre páginas: si el navegador las salta, ignora el aviso (no es un error).
+    ["pagereveal", "pageswap"].forEach((t) => addEventListener(t, (e) => { const v = e.viewTransition; if (v) { v.ready.catch(() => {}); v.finished.catch(() => {}); } }));
+  </script>
+  <!-- Precarga las páginas del sitio cuando el dedo o el mouse se acerca a un enlace (navegación casi instantánea) -->
+  <script type="speculationrules">{"prefetch":[{"where":{"href_matches":"/*.html"},"eagerness":"moderate"}]}</script>
+</head>
+<body class="is-locked page-home">
+  <noscript>
+    <div class="nojs"><div><h1>Activa JavaScript</h1><p>Este sitio necesita JavaScript para verificar que eres mayor de edad y mostrar el catálogo.</p></div></div>
+  </noscript>
+  <a class="skip" href="#main">Saltar al contenido</a>
+
+  <!-- Precarga y cortina de transición -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__center">
+      <div class="loader__logo"><span id="loaderLogo">PARCHADITOS</span></div>
+      <div class="loader__bar"><i id="loaderBar"></i></div>
+      <span class="loader__count"><span id="loaderCount">0</span>%</span>
+    </div>
+  </div>
+  <div class="curtain" id="curtain" aria-hidden="true"><span>PARCHADITOS<em>.</em></span></div>
+  <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+
+
+  <!-- Verificación de edad -->
+  <div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="ageTitle">
+    <div class="age-gate__box">
+      <p class="eyebrow">Acceso restringido</p>
+      <h2 id="ageTitle" class="age-gate__title">¿Eres mayor de 18 años?</h2>
+      <p class="age-gate__text">Este sitio contiene alcohol y productos de tabaco y vapeo. Solo para mayores de edad.</p>
+      <div class="age-gate__actions">
+        <button class="btn btn--accent" id="ageYes">Sí, soy mayor</button>
+        <button class="btn btn--ghost" id="ageNo">No</button>
+      </div>
+      <p class="age-gate__denied" id="ageDenied" hidden>Lo sentimos, no puedes ingresar a este sitio.</p>
+    </div>
+  </div>
+
+  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <a href="#inicio" class="logo" aria-label="Parchaditos, inicio">
+      <!-- Reemplazar por el logo: <img src="assets/logo.svg" alt="Parchaditos"> -->
+      <span class="logo__text">PARCHADITOS</span>
+      <span class="logo__by">ByNubex</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="productos.html" class="nav__link">Productos</a>
+      <a href="#servicios" class="nav__link">Servicios</a>
+      <a href="reservas.html" class="nav__link">Reservas</a>
+      <a href="contacto.html" class="nav__link">Contacto</a>
+    </nav>
+    <span class="status js-status" aria-live="polite"></span>
+    <a href="reservas.html" class="btn btn--accent btn--sm header__cta magnetic">Reservar VIP</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="inicio" data-hub-after>
+      <div class="hero__stage">
+        <div class="hero__media" id="heroMedia"></div>
+        <canvas class="hero__smoke" id="smoke" aria-hidden="true"></canvas>
+
+        <!-- Capa base -->
+        <div class="layer layer--base">
+          <h1 class="big" aria-label="Parchaditos">
+            <span class="big__line js-big1"><span class="split">PARCHA</span></span>
+            <span class="big__line js-big2"><span class="split">DITOS</span></span>
+          </h1>
+        </div>
+
+        <!-- Objeto 3D o PNG protagonista (HERO.modelo / HERO.objeto en config.js) -->
+        <div class="hero__obj" id="heroObj" aria-hidden="true"></div>
+
+        <!-- Capa que aparece con el cursor -->
+        <div class="layer layer--reveal" id="reveal" aria-hidden="true">
+          <div class="big">
+            <span class="big__line js-big1"><span class="split">PARCHA</span></span>
+            <span class="big__line js-big2"><span class="split">DITOS</span></span>
+          </div>
+          <p class="reveal__tag">¿Qué está pasando?</p>
+        </div>
+
+        <!-- Interfaz -->
+        <div class="hero__ui">
+          <p class="eyebrow hero__eyebrow">¿Ya te parchaste?</p>
+          <div class="hero__bottom">
+            <p class="hero__lead">Licores, vapes, blunt wraps, granizados y dos zonas VIP para que el parche no pare.</p>
+            <div class="hero__actions">
+              <a href="productos.html" class="btn btn--ghost magnetic">Ver productos</a>
+              <a href="reservas.html" class="btn btn--reserve magnetic" data-cursor="Ir">
+                <span class="btn--reserve__text">Reservar VIP</span>
+                <span class="btn--reserve__icon" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+          <span class="hero__hint" aria-hidden="true">Mueve el cursor</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" id="marquee" aria-hidden="true">
+      <div class="marquee__track"></div>
+    </div>
+
+    <!-- MANIFIESTO -->
+    <section class="manifesto" aria-labelledby="askTitle">
+      <!-- La frase de las ventanas del local, en grande -->
+      <h2 class="ask" id="askTitle"><span class="ask__open">¿</span>Qué está <em>pasando<span class="ask__q">?</span></em></h2>
+      <p class="manifesto__text js-fill">Ven como eres. El granizado frío y la música hasta que tú digas, los ponemos nosotros.</p>
+    </section>
+
+    <!-- CIFRAS -->
+    <section class="stats" id="stats" aria-label="En cifras"></section>
+
+    <!-- PRODUCTOS -->
+    <section class="products" id="productos">
+      <div class="section-head">
+        <h2 class="section-title reveal-text">Lo que <em>tenemos</em></h2>
+      </div>
+
+      <div class="hscroll" id="hscroll">
+        <div class="hscroll__track"></div>
+      </div>
+      <div class="hscroll__dots" id="hscrollDots" aria-hidden="true"></div>
+
+      <div class="more">
+        <a href="productos.html" class="more__link" data-cursor="Ver todo">
+          <span class="more__text">Ver todo el <em>catálogo</em></span>
+          <span class="more__go" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- EXPERIENCIA: tarjetas apiladas -->
+    <section class="exp" aria-labelledby="expTitle">
+      <div class="section-head">
+        <h2 class="section-title reveal-text" id="expTitle">Así va <em>el parche</em></h2>
+      </div>
+      <div class="exp__stack">
+        <article class="exp__card" style="--i:0">
+          <span class="exp__num">01</span>
+          <div class="exp__body">
+            <h3 class="exp__title">Llegas</h3>
+            <p>Granizado bien frío o la botella de la casa. Te recibimos en la mesa y arrancamos.</p>
+          </div>
+          <span class="exp__ghost" aria-hidden="true">FRÍO</span>
+        </article>
+        <article class="exp__card" style="--i:1">
+          <span class="exp__num">02</span>
+          <div class="exp__body">
+            <h3 class="exp__title">Prendes</h3>
+            <p>Hookah preparada al momento con el sabor que quieras. Cambio de carbón incluido.</p>
+          </div>
+          <span class="exp__ghost" aria-hidden="true">HUMO</span>
+        </article>
+        <article class="exp__card exp__card--red" style="--i:2">
+          <span class="exp__num">03</span>
+          <div class="exp__body">
+            <h3 class="exp__title">Te quedas</h3>
+            <p>Zona VIP para tu grupo, atención directa y, el fin de semana, la noche hasta las 2 a.m.</p>
+          </div>
+          <span class="exp__ghost" aria-hidden="true">VIP</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- EL SITIO: galería (fotos en GALLERY de config.js) -->
+    <section class="gallery" id="sitio" aria-labelledby="sitioTitle">
+      <div class="section-head">
+        <h2 class="section-title reveal-text" id="sitioTitle">Así se <em>ve</em></h2>
+      </div>
+      <div class="gallery__grid" id="galleryGrid"></div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section class="services" id="servicios">
+      <div class="section-head">
+        <h2 class="section-title reveal-text">Arma tu <em>parche</em></h2>
+      </div>
+      <div class="services__list">
+        <article class="service" data-cursor="Reservar">
+          <div class="service__top"><span class="service__num">A</span><span class="service__tag">En el salón</span></div>
+          <h3 class="service__title">Hookah</h3>
+          <p class="service__desc">Cachimba preparada en mesa, con sabores a elección y carbón natural.</p>
+          <ul class="service__feats"><li><span><span class="js-flavors">7</span> sabores para escoger</span></li><li>Cambio de carbón incluido</li><li>Boquillas individuales</li></ul>
+          <a href="reservas.html?servicio=hookah" class="btn btn--ghost service__btn">Apartar mesa con hookah</a>
+        </article>
+        <article class="service" data-cursor="Reservar">
+          <div class="service__top"><span class="service__num">B</span><span class="service__tag">Con reserva</span></div>
+          <h3 class="service__title">Zona VIP</h3>
+          <p class="service__desc">Dos zonas privadas para tu grupo, con atención directa a la mesa.</p>
+          <ul class="service__feats"><li>2 zonas disponibles</li><li>Atención preferencial</li><li>Ideal para cumpleaños</li></ul>
+          <a href="reservas.html?servicio=vip" class="btn btn--ghost service__btn">Reservar VIP</a>
+        </article>
+        <article class="service service--featured" data-cursor="Reservar">
+          <div class="service__top"><span class="service__num">C</span><span class="service__tag">El más pedido</span></div>
+          <h3 class="service__title">VIP + Hookah</h3>
+          <p class="service__desc">La zona VIP con hookah incluida. El combo completo.</p>
+          <ul class="service__feats"><li>Zona privada reservada</li><li>Hookah incluida</li><li>Mejor precio que por separado</li></ul>
+          <a href="reservas.html?servicio=combo" class="btn btn--light service__btn">Reservar combo</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- RESEÑAS (aparece cuando hay REVIEWS en config.js) -->
+    <section class="reviews" id="resenas" aria-labelledby="resenasTitle">
+      <div class="section-head">
+        <h2 class="section-title reveal-text" id="resenasTitle">El <em>parche</em> habla</h2>
+      </div>
+      <div class="reviews__list"></div>
+      <div class="reviews__more"></div>
+    </section>
+
+    <!-- CÓMO LLEGAR -->
+    <section id="ubicacion" aria-labelledby="visitTitle">
+      <div class="section-head">
+        <h2 class="section-title reveal-text" id="visitTitle">Te <em>esperamos</em></h2>
+      </div>
+      <div class="visit">
+        <div class="visit__info">
+          <div>
+            <p class="visit__addr js-address-inline"></p>
+            <p class="visit__hours js-hours"></p>
+            <span class="status js-status"></span>
+          </div>
+          <div class="visit__actions">
+            <a class="btn btn--accent magnetic js-route" href="#" target="_blank" rel="noopener">Cómo llegar</a>
+            <a class="btn btn--ghost wa-link" href="#">Escríbenos</a>
+          </div>
+        </div>
+        <div class="visit__map">
+          <div class="visit__pin">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+            <button type="button" class="btn btn--ghost">Ver mapa aquí</button>
+            <p>El mapa es de Google y solo se carga si lo abres.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="contacto">
+    <div class="footer__big" aria-hidden="true"><span class="split">PARCHADITOS</span></div>
+    <div class="footer__claim">
+      <p>El parche <em>no para.</em></p>
+      <a class="footer__talk magnetic wa-link" href="#" data-cursor="Hablar">Escríbenos</a>
+    </div>
+    <div class="footer__grid">
+      <div><p class="eyebrow">Dirección</p><p class="js-address"></p></div>
+      <div><p class="eyebrow">Horario</p><p class="js-hours"></p></div>
+      <div><p class="eyebrow">Redes</p><p class="js-social"></p></div>
+    </div>
+    <div class="footer__end">
+      <span class="status js-status"></span>
+      <button class="totop magnetic" id="toTop" type="button" aria-label="Volver arriba">↑</button>
+    </div>
+    <div class="footer__legal">
+      <p>Venta prohibida a menores de 18 años. El exceso de alcohol es perjudicial para la salud. Consume con responsabilidad.</p>
+      <p><a href="privacidad.html" class="footer__link">Política de privacidad</a> · © <span class="js-year"></span> <span class="js-name">Parchaditos</span></p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" integrity="sha384-B2WBjDzEjJpYvhmi2UyEn7rektqkf5suS6sNoyyrf0EBAwBHdkiXxIlU0V5Ru2ed" crossorigin="anonymous"></script>
+  <script src="js/config.js?v=20261006172043"></script>
+  <script src="js/common.js?v=20261006172043"></script>
+  <script src="js/fx.js?v=20261006172043"></script>
+  <script src="js/dock.js?v=20261006172043"></script>
+  <script src="js/cart.js?v=20261006172043"></script>
+  <script src="js/loyverse.js?v=20261006172043"></script>
+  <script src="js/mesa.js?v=20261006172043"></script>
+  <script src="js/home.js?v=20261006172043"></script>
+</body>
+</html>

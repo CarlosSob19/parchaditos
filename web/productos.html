@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Productos | Parchaditos</title>
+  <meta name="description" content="Licores, vapes, blunt wraps y granizados. Arma tu pedido y envíalo por WhatsApp. Solo mayores de 18 años.">
+  <meta name="theme-color" content="#0a0606">
+  <meta name="color-scheme" content="dark">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Productos | Parchaditos">
+  <meta property="og:description" content="Licores, vapes, blunt wraps y granizados. Arma tu pedido y envíalo por WhatsApp. Solo mayores de 18 años.">
+  <meta property="og:locale" content="es_CO">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png?v=2" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=2">
+  <meta property="og:image" content="https://TU-DOMINIO.com/assets/og.jpg">
+  <link rel="manifest" href="site.webmanifest?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/signo.woff2?v=2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/styles.css?v=20261006172043">
+  <link rel="stylesheet" href="css/mesa.css?v=20261006172043">
+  <script>
+    // Transiciones nativas entre páginas: si el navegador las salta, ignora el aviso (no es un error).
+    ["pagereveal", "pageswap"].forEach((t) => addEventListener(t, (e) => { const v = e.viewTransition; if (v) { v.ready.catch(() => {}); v.finished.catch(() => {}); } }));
+  </script>
+  <!-- Precarga las páginas del sitio cuando el dedo o el mouse se acerca a un enlace (navegación casi instantánea) -->
+  <script type="speculationrules">{"prefetch":[{"where":{"href_matches":"/*.html"},"eagerness":"moderate"}]}</script>
+</head>
+<body class="is-locked page-products">
+  <noscript>
+    <div class="nojs"><div><h1>Activa JavaScript</h1><p>Este sitio necesita JavaScript para verificar que eres mayor de edad y mostrar el catálogo.</p></div></div>
+  </noscript>
+  <a class="skip" href="#main">Saltar al contenido</a>
+
+  <!-- Precarga y cortina de transición -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__center">
+      <div class="loader__logo"><span id="loaderLogo">PARCHADITOS</span></div>
+      <div class="loader__bar"><i id="loaderBar"></i></div>
+      <span class="loader__count"><span id="loaderCount">0</span>%</span>
+    </div>
+  </div>
+  <div class="curtain" id="curtain" aria-hidden="true"><span>PARCHADITOS<em>.</em></span></div>
+  <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+
+
+  <div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="ageTitle">
+    <div class="age-gate__box">
+      <p class="eyebrow">Acceso restringido</p>
+      <h2 id="ageTitle" class="age-gate__title">¿Eres mayor de 18 años?</h2>
+      <p class="age-gate__text">Este sitio contiene alcohol y productos de tabaco y vapeo. Solo para mayores de edad.</p>
+      <div class="age-gate__actions">
+        <button class="btn btn--accent" id="ageYes">Sí, soy mayor</button>
+        <button class="btn btn--ghost" id="ageNo">No</button>
+      </div>
+      <p class="age-gate__denied" id="ageDenied" hidden>Lo sentimos, no puedes ingresar a este sitio.</p>
+    </div>
+  </div>
+
+  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+
+  <header class="header" id="header">
+    <a href="index.html" class="logo" aria-label="Parchaditos, inicio">
+      <span class="logo__text">PARCHADITOS</span>
+      <span class="logo__by">ByNubex</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="productos.html" class="nav__link" aria-current="page">Productos</a>
+      <a href="index.html#servicios" class="nav__link">Servicios</a>
+      <a href="reservas.html" class="nav__link">Reservas</a>
+      <a href="contacto.html" class="nav__link">Contacto</a>
+    </nav>
+    <span class="status js-status" aria-live="polite"></span>
+    <a href="reservas.html" class="btn btn--accent btn--sm header__cta magnetic">Reservar VIP</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main class="pg" id="main">
+    <section class="pg__head" data-hub-after>
+      <p class="eyebrow">Catálogo</p>
+      <h1 class="pg__title" aria-label="Lo que tenemos">
+        <span class="big__line"><span class="split">LO QUE</span></span>
+        <span class="big__line pg__title-red"><span class="split">TENEMOS</span></span>
+      </h1>
+      <p class="pg__lead">Agrega lo que quieras al pedido y lo envías completo por WhatsApp. Te confirmamos disponibilidad al momento.</p>
+    </section>
+
+    <section class="catalog" id="catalogo" aria-label="Catálogo">
+      <div class="pg__bar">
+        <div class="tabs" role="tablist" aria-label="Filtrar por categoría"></div>
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <label class="sr-only" for="search">Buscar productos</label>
+          <input id="search" type="search" enterkeyhint="search" placeholder="Buscar…" autocomplete="off">
+          <button type="button" class="search__close" id="searchClose" aria-label="Cerrar búsqueda">✕</button>
+        </div>
+        <span class="pg__count" id="resultCount" aria-live="polite"></span>
+      </div>
+      <div class="grid" id="productGrid" role="tabpanel"></div>
+    </section>
+
+    <!-- PREGUNTAS FRECUENTES -->
+    <section class="faq" id="preguntas" aria-labelledby="faqTitle">
+      <div class="section-head">
+        <p class="eyebrow">Preguntas</p>
+        <h2 class="section-title reveal-text" id="faqTitle">Antes de <em>pedir</em></h2>
+      </div>
+      <div class="faq__list" id="faqList"></div>
+    </section>
+  </main>
+
+  <footer class="footer footer--slim" id="contacto">
+    <div class="footer__grid">
+      <div><p class="eyebrow">Dirección</p><p class="js-address"></p></div>
+      <div><p class="eyebrow">Horario</p><p class="js-hours"></p></div>
+      <div><p class="eyebrow">Redes</p><p class="js-social"></p></div>
+    </div>
+    <div class="footer__end">
+      <span class="status js-status"></span>
+      <button class="totop magnetic" id="toTop" type="button" aria-label="Volver arriba">↑</button>
+    </div>
+    <div class="footer__legal">
+      <p>Venta prohibida a menores de 18 años. El exceso de alcohol es perjudicial para la salud. Consume con responsabilidad.</p>
+      <p><a href="privacidad.html" class="footer__link">Política de privacidad</a> · © <span class="js-year"></span> <span class="js-name">Parchaditos</span></p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" integrity="sha384-B2WBjDzEjJpYvhmi2UyEn7rektqkf5suS6sNoyyrf0EBAwBHdkiXxIlU0V5Ru2ed" crossorigin="anonymous"></script>
+  <script src="js/config.js?v=20261006172043"></script>
+  <script src="js/common.js?v=20261006172043"></script>
+  <script src="js/fx.js?v=20261006172043"></script>
+  <script src="js/dock.js?v=20261006172043"></script>
+  <script src="js/cart.js?v=20261006172043"></script>
+  <script src="js/loyverse.js?v=20261006172043"></script>
+  <script src="js/mesa.js?v=20261006172043"></script>
+  <script src="js/productos.js?v=20261006172043"></script>
+</body>
+</html>

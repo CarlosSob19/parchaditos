@@ -1,0 +1,9 @@
+{
+  "name": "parchaditos",
+  "private": true,
+  "description": "Publica la web en Cloudflare Pages solo si todos los QR impresos siguen funcionando.",
+  "scripts": {
+    "verificar-qr": "node tools/verificar-qr.mjs",
+    "publicar": "node tools/verificar-qr.mjs && npx wrangler pages deploy web --project-name parchaditos && node tools/verificar-qr.mjs --url https://parchaditos.pages.dev"
+  }
+}

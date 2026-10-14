@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- Plan B de los QR impresos. Si _redirects falla, se borra o el hosting no lo lee, las rutas cortas
+       llegan aquí y este script las manda a su destino. Debe coincidir con _redirects:
+       tools/verificar-qr.mjs lo comprueba. No depende de ningún otro archivo a propósito. -->
+  <script id="qr-rutas" type="application/json">
+    {
+      "/carta": "/productos.html",
+      "/reservar": "/reservas.html",
+      "/vip": "/reservas.html?servicio=vip",
+      "/hookah": "/reservas.html?servicio=hookah",
+      "/cumple": "/reservas.html?servicio=combo&ocasion=Cumplea%C3%B1os",
+      "/resena": "/ir-resena.html",
+      "/m/:mesa": "/productos.html?mesa=:mesa"
+    }
+  </script>
+  <script>
+    (function () {
+      try {
+        var rutas = JSON.parse(document.getElementById("qr-rutas").textContent);
+        // Tolera mayúsculas, "/" al final y ".html": /CARTA/, /m/VIP1/ y /carta.html sirven igual.
+        var p = decodeURIComponent(location.pathname).toLowerCase().replace(/\.html$/, "").replace(/\/+$/, "") || "/";
+        var m = p.match(/^\/m\/([a-z0-9-]+)$/);
+        var destino = m ? rutas["/m/:mesa"].replace(":mesa", m[1]) : rutas[p];
+        if (destino) location.replace(destino);
+      } catch (e) {}
+    })();
+  </script>
+  <title>Página no encontrada | Parchaditos</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0a0606">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="/assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png?v=2" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&display=swap" rel="stylesheet">
+  <!-- Rutas absolutas: esta página se sirve en cualquier URL que no exista. -->
+  <link rel="stylesheet" href="/css/styles.css?v=20261006172043">
+  <link rel="stylesheet" href="/css/legal.css?v=20261006172043">
+  <script>
+    // Transiciones nativas entre páginas: si el navegador las salta, ignora el aviso (no es un error).
+    ["pagereveal", "pageswap"].forEach((t) => addEventListener(t, (e) => { const v = e.viewTransition; if (v) { v.ready.catch(() => {}); v.finished.catch(() => {}); } }));
+  </script>
+  <!-- Precarga las páginas del sitio cuando el dedo o el mouse se acerca a un enlace (navegación casi instantánea) -->
+  <script type="speculationrules">{"prefetch":[{"where":{"href_matches":"/*.html"},"eagerness":"moderate"}]}</script>
+</head>
+<body class="is-locked page-lost">
+  <noscript><style>body.is-locked { overflow: auto; }</style></noscript>
+  <a class="skip" href="#main">Saltar al contenido</a>
+  <div class="curtain" id="curtain" aria-hidden="true"><span>PARCHADITOS<em>.</em></span></div>
+  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+
+  <header class="header" id="header">
+    <a href="/index.html" class="logo" aria-label="Parchaditos, inicio">
+      <span class="logo__text">PARCHADITOS</span>
+      <span class="logo__by">ByNubex</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="/productos.html" class="nav__link">Productos</a>
+      <a href="/index.html#servicios" class="nav__link">Servicios</a>
+      <a href="/reservas.html" class="nav__link">Reservas</a>
+      <a href="/contacto.html" class="nav__link">Contacto</a>
+    </nav>
+    <span class="status js-status" aria-live="polite"></span>
+    <a href="/reservas.html" class="btn btn--accent btn--sm header__cta magnetic">Reservar VIP</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main class="lost" id="main">
+    <h1 class="lost__code" data-hub-after aria-label="Error 404: página no encontrada">4<span class="lost__sign" aria-hidden="true">?</span>4</h1>
+    <p class="lost__text">Este parche no existe. Puede que el enlace esté mal o que la página se haya movido.</p>
+    <div class="lost__actions">
+      <a href="/productos.html" class="btn btn--accent magnetic">Ver la carta</a>
+      <a href="/reservas.html" class="btn btn--ghost magnetic">Reservar</a>
+      <a href="/index.html" class="lost__home">Volver al inicio</a>
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" integrity="sha384-B2WBjDzEjJpYvhmi2UyEn7rektqkf5suS6sNoyyrf0EBAwBHdkiXxIlU0V5Ru2ed" crossorigin="anonymous"></script>
+  <script src="/js/config.js?v=20261006172043"></script>
+  <script src="/js/common.js?v=20261006172043"></script>
+  <script src="/js/fx.js?v=20261006172043"></script>
+  <script src="/js/dock.js?v=20261006172043"></script>
+  <script src="/js/cart.js?v=20261006172043"></script>
+</body>
+</html>

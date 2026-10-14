@@ -1,0 +1,28 @@
+# Cabeceras para Cloudflare Pages y Netlify (ambos leen este archivo).
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  # Política de seguridad de contenido. Empieza en modo "Report-Only": NO bloquea nada,
+  # solo avisa en la consola del navegador lo que infringiría. Cuando confirmes que la web
+  # se ve bien y la consola no marca nada propio, renómbrala a "Content-Security-Policy"
+  # (quita "-Report-Only") para que pase a bloquear de verdad.
+  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com https://fonts.gstatic.com; worker-src 'self' blob:; frame-src https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+
+# CSS y JS: el navegador pregunta siempre si cambiaron (respuesta 304 si no). Así nadie se queda
+# con un estilo viejo aunque el número ?v= se repita.
+# El service worker se revisa siempre: así los cambios llegan en la siguiente visita.
+/sw.js
+  Cache-Control: no-cache
+
+/css/*
+  Cache-Control: public, max-age=0, must-revalidate
+/js/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Fotos y logos: caché larga. Si cambias una foto, cámbiale también el nombre.
+/assets/*
+  Cache-Control: public, max-age=2592000

@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+# Páginas internas: generador de QR, rutas cortas de los QR y la función de Loyverse.
+Disallow: /qr.html
+Disallow: /m/
+Disallow: /ir-resena.html
+Disallow: /api/
+
+# Cambia TU-DOMINIO.com por el dominio real.
+Sitemap: https://TU-DOMINIO.com/sitemap.xml

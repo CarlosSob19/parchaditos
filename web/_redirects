@@ -1,0 +1,22 @@
+# Rutas cortas para los QR impresos (Cloudflare Pages y Netlify leen este archivo).
+# El QR apunta a la ruta corta; si mañana cambias el destino, editas esta línea y no reimprimes nada.
+# 302 = temporal, para que el navegador no guarde el destino y siempre lea el más nuevo.
+#
+# ¡OJO! Hay QR impresos con estas rutas. Si cambias algo aquí, cambia lo mismo en el bloque
+# "qr-rutas" de 404.html (plan B) y corre "npm run verificar-qr". "npm run publicar" no publica si algo no cuadra.
+
+# QR de la entrada, flyers y redes.
+/carta       /productos.html                                     302
+/reservar    /reservas.html                                      302
+/vip         /reservas.html?servicio=vip                         302
+/hookah      /reservas.html?servicio=hookah                      302
+/cumple      /reservas.html?servicio=combo&ocasion=Cumplea%C3%B1os  302
+
+# QR de la cuenta o la salida: lleva a dejar reseña en Google (enlace en INFO.resenas de js/config.js).
+/resena      /ir-resena.html                                     302
+
+# QR de cada mesa: /m/vip1 abre la carta (productos.html) en "modo mesa" (ids en TABLES de js/config.js).
+# Va de último porque lleva comodín (:mesa).
+# En producción manda functions/m/[mesa].js: Cloudflare no reemplaza :mesa dentro del "?mesa=".
+# Esta línea queda como respaldo para hostings sin funciones (Netlify sí lo reemplaza).
+/m/:mesa     /productos.html?mesa=:mesa                          302

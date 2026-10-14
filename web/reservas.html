@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Reservas | Parchaditos</title>
+  <meta name="description" content="Reserva tu zona VIP, hookah o el combo VIP + Hookah en Parchaditos.">
+  <meta name="theme-color" content="#0a0606">
+  <meta name="color-scheme" content="dark">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Reservas | Parchaditos">
+  <meta property="og:description" content="Reserva tu zona VIP, hookah o el combo VIP + Hookah en Parchaditos.">
+  <meta property="og:locale" content="es_CO">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png?v=2" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=2">
+  <meta property="og:image" content="https://TU-DOMINIO.com/assets/og.jpg">
+  <link rel="manifest" href="site.webmanifest?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/signo.woff2?v=2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/styles.css?v=20261006172043">
+  <link rel="stylesheet" href="css/reservas.css?v=20261006172043">
+  <script>
+    // Transiciones nativas entre páginas: si el navegador las salta, ignora el aviso (no es un error).
+    ["pagereveal", "pageswap"].forEach((t) => addEventListener(t, (e) => { const v = e.viewTransition; if (v) { v.ready.catch(() => {}); v.finished.catch(() => {}); } }));
+  </script>
+  <!-- Precarga las páginas del sitio cuando el dedo o el mouse se acerca a un enlace (navegación casi instantánea) -->
+  <script type="speculationrules">{"prefetch":[{"where":{"href_matches":"/*.html"},"eagerness":"moderate"}]}</script>
+</head>
+<body class="is-locked page-booking">
+  <noscript>
+    <div class="nojs"><div><h1>Activa JavaScript</h1><p>Este sitio necesita JavaScript para verificar que eres mayor de edad y mostrar el catálogo.</p></div></div>
+  </noscript>
+  <a class="skip" href="#main">Saltar al contenido</a>
+
+  <!-- Precarga y cortina de transición -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__center">
+      <div class="loader__logo"><span id="loaderLogo">PARCHADITOS</span></div>
+      <div class="loader__bar"><i id="loaderBar"></i></div>
+      <span class="loader__count"><span id="loaderCount">0</span>%</span>
+    </div>
+  </div>
+  <div class="curtain" id="curtain" aria-hidden="true"><span>PARCHADITOS<em>.</em></span></div>
+  <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+
+
+  <div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="ageTitle">
+    <div class="age-gate__box">
+      <p class="eyebrow">Acceso restringido</p>
+      <h2 id="ageTitle" class="age-gate__title">¿Eres mayor de 18 años?</h2>
+      <p class="age-gate__text">Este sitio contiene alcohol y productos de tabaco y vapeo. Solo para mayores de edad.</p>
+      <div class="age-gate__actions">
+        <button class="btn btn--accent" id="ageYes">Sí, soy mayor</button>
+        <button class="btn btn--ghost" id="ageNo">No</button>
+      </div>
+      <p class="age-gate__denied" id="ageDenied" hidden>Lo sentimos, no puedes ingresar a este sitio.</p>
+    </div>
+  </div>
+
+  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+
+  <header class="header" id="header">
+    <a href="index.html" class="logo" aria-label="Parchaditos, inicio">
+      <span class="logo__text">PARCHADITOS</span>
+      <span class="logo__by">ByNubex</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="productos.html" class="nav__link">Productos</a>
+      <a href="index.html#servicios" class="nav__link">Servicios</a>
+      <a href="reservas.html" class="nav__link" aria-current="page">Reservas</a>
+      <a href="contacto.html" class="nav__link">Contacto</a>
+    </nav>
+    <span class="status js-status" aria-live="polite"></span>
+    <a href="productos.html" class="btn btn--ghost btn--sm header__cta">Ver productos</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main class="bk" id="main">
+    <section class="bk__head" data-hub-after>
+      <p class="eyebrow">Reservas</p>
+      <h1 class="bk__title" aria-label="Reserva tu parche">
+        <span class="big__line"><span class="split">RESERVA</span></span>
+        <span class="big__line bk__title-red"><span class="split">TU PARCHE</span></span>
+      </h1>
+      <p class="bk__lead">Cinco pasos y listo. Al final te llevamos a WhatsApp con todo escrito para confirmar disponibilidad.</p>
+    </section>
+
+    <div class="bk__layout">
+      <div class="bk__flow">
+        <ol class="steps" id="steps" aria-label="Pasos de la reserva"></ol>
+
+        <form class="bk__form" id="bkForm" novalidate>
+          <!-- 1. Servicio -->
+          <section class="step" data-step="servicio" aria-labelledby="s1">
+            <h2 class="step__title" id="s1">¿Qué quieres?</h2>
+            <div class="opts opts--services" id="optServices" role="radiogroup" aria-labelledby="s1"></div>
+          </section>
+
+          <!-- 2. Zona -->
+          <section class="step" data-step="zona" aria-labelledby="s2" hidden>
+            <h2 class="step__title" id="s2">Escoge tu zona</h2>
+            <div class="opts opts--zones" id="optZones" role="radiogroup" aria-labelledby="s2"></div>
+          </section>
+
+          <!-- 3. Fecha y hora -->
+          <section class="step" data-step="fecha" aria-labelledby="s3" hidden>
+            <h2 class="step__title" id="s3">¿Cuándo vienes?</h2>
+            <div class="dates" id="optDates" role="radiogroup" aria-label="Día"></div>
+            <h3 class="step__sub">Hora de llegada</h3>
+            <div class="tgroups" id="timeGroups" role="radiogroup" aria-label="Franja"></div>
+            <div class="times" id="optTimes" role="radiogroup" aria-label="Hora">
+              <p class="times__empty">Escoge un día primero.</p>
+            </div>
+          </section>
+
+          <!-- 4. Personas -->
+          <section class="step" data-step="personas" aria-labelledby="s4" hidden>
+            <h2 class="step__title" id="s4">¿Cuántos vienen?</h2>
+            <div class="stepper">
+              <button type="button" class="stepper__btn" id="peopleMinus" aria-label="Quitar una persona">−</button>
+              <output class="stepper__value" id="peopleValue" aria-live="polite">4</output>
+              <button type="button" class="stepper__btn" id="peoplePlus" aria-label="Agregar una persona">+</button>
+            </div>
+            <p class="stepper__label" id="peopleLabel">personas</p>
+            <div class="chips" id="peopleChips"></div>
+            <p class="people__note" id="peopleNote"></p>
+          </section>
+
+          <!-- 5. Datos -->
+          <section class="step" data-step="datos" aria-labelledby="s5" hidden>
+            <h2 class="step__title" id="s5">Tus datos</h2>
+            <div class="fields">
+              <div class="field">
+                <label for="fName">Nombre</label>
+                <input id="fName" name="nombre" type="text" autocomplete="name" enterkeyhint="next" maxlength="60" placeholder="¿A nombre de quién?" aria-describedby="fNameErr" required>
+                <p class="field__error" id="fNameErr" aria-live="polite"></p>
+              </div>
+              <div class="field">
+                <label for="fPhone">Celular</label>
+                <input id="fPhone" name="telefono" type="tel" inputmode="tel" autocomplete="tel" enterkeyhint="done" maxlength="16" placeholder="300 123 4567" aria-describedby="fPhoneErr" required>
+                <p class="field__error" id="fPhoneErr" aria-live="polite"></p>
+              </div>
+              <div class="field field--full">
+                <span class="field__label">¿Qué celebran?</span>
+                <div class="chips" id="occasionChips"></div>
+              </div>
+              <div class="field field--full" id="flavorField" hidden>
+                <span class="field__label">Sabor de hookah</span>
+                <div class="chips" id="flavorChips"></div>
+              </div>
+              <div class="field field--full">
+                <label for="fNotes">Notas (opcional)</label>
+                <textarea id="fNotes" name="notas" rows="3" placeholder="Torta, decoración, algo especial…"></textarea>
+              </div>
+            </div>
+          </section>
+
+          <div class="step-nav">
+            <p class="step-nav__mini" id="miniSummary" aria-live="polite"></p>
+            <div class="step-nav__btns">
+              <button type="button" class="btn btn--ghost" id="btnBack">Atrás</button>
+              <button type="submit" class="btn btn--accent magnetic" id="btnNext">Continuar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <aside class="summary" aria-label="Resumen de la reserva">
+        <p class="eyebrow">Tu reserva</p>
+        <h2 class="summary__title" id="sumService">Sin escoger</h2>
+        <dl class="summary__list">
+          <div><dt>Zona</dt><dd id="sumZone">—</dd></div>
+          <div><dt>Fecha</dt><dd id="sumDate">—</dd></div>
+          <div><dt>Hora</dt><dd id="sumTime">—</dd></div>
+          <div><dt>Personas</dt><dd id="sumPeople">4</dd></div>
+        </dl>
+        <p class="summary__note">Precio y disponibilidad se confirman por WhatsApp. La reserva queda lista cuando te respondemos.</p>
+      </aside>
+    </div>
+
+    <!-- Confirmación -->
+    <section class="done" id="done" hidden>
+      <div id="donePending">
+        <p class="eyebrow">Último paso</p>
+        <h2 class="done__title">Envía el<br>mensaje en <em>WhatsApp</em></h2>
+        <p class="done__summary" id="doneSummary"></p>
+        <ol class="done__steps">
+          <li><b>1</b>Abre WhatsApp con tu reserva escrita.</li>
+          <li><b>2</b>Toca enviar. Sin ese mensaje no nos llega.</li>
+          <li><b>3</b>Te confirmamos disponibilidad en minutos.</li>
+        </ol>
+        <div class="done__actions">
+          <a class="btn btn--accent" id="doneWa" href="#" target="_blank" rel="noopener">Abrir WhatsApp y enviar</a>
+          <button type="button" class="btn btn--ghost" id="doneSent">Ya lo envié</button>
+        </div>
+        <button type="button" class="done__edit" id="doneEdit">Cambiar algo de la reserva</button>
+      </div>
+      <div id="doneOk" hidden>
+        <p class="eyebrow">Mensaje enviado</p>
+        <h2 class="done__title">¡Nos vemos<br>en el <em>parche</em>!</h2>
+        <p class="done__text">Te respondemos por WhatsApp para confirmar. La reserva queda lista con nuestra respuesta.</p>
+        <div class="done__actions">
+          <a class="btn btn--accent" href="productos.html">Ver productos</a>
+          <a class="btn btn--ghost" href="index.html">Volver al inicio</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer footer--slim" id="contacto">
+    <div class="footer__grid">
+      <div><p class="eyebrow">Dirección</p><p class="js-address"></p></div>
+      <div><p class="eyebrow">Horario</p><p class="js-hours"></p></div>
+      <div><p class="eyebrow">Redes</p><p class="js-social"></p></div>
+    </div>
+    <div class="footer__end">
+      <span class="status js-status"></span>
+      <button class="totop magnetic" id="toTop" type="button" aria-label="Volver arriba">↑</button>
+    </div>
+    <div class="footer__legal">
+      <p>Venta prohibida a menores de 18 años. El exceso de alcohol es perjudicial para la salud. Consume con responsabilidad.</p>
+      <p><a href="privacidad.html" class="footer__link">Política de privacidad</a> · © <span class="js-year"></span> <span class="js-name">Parchaditos</span></p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" integrity="sha384-B2WBjDzEjJpYvhmi2UyEn7rektqkf5suS6sNoyyrf0EBAwBHdkiXxIlU0V5Ru2ed" crossorigin="anonymous"></script>
+  <script src="js/config.js?v=20261006172043"></script>
+  <script src="js/common.js?v=20261006172043"></script>
+  <script src="js/fx.js?v=20261006172043"></script>
+  <script src="js/dock.js?v=20261006172043"></script>
+  <script src="js/cart.js?v=20261006172043"></script>
+  <script src="js/reservas.js?v=20261006172043"></script>
+</body>
+</html>

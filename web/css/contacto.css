@@ -1,0 +1,200 @@
+/* ===== Página de contacto ===== */
+.page-contact .footer { padding-bottom: 120px; }
+.ct { padding-bottom: 80px; }
+/* Un solo título gigante por página ("Hablemos claro"): las secciones van más pequeñas. */
+.ct__head { padding-top: 8px; padding-bottom: 20px; }
+.ct .section-title { font-size: clamp(36px, 6vw, 88px); }
+
+/* ----- Reservas y pedidos ----- */
+.ct__grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.8fr) 1.2fr;
+  gap: 16px;
+  padding: 0 var(--gutter);
+}
+.ct__wa {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 18px;
+  padding: 48px 24px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: radial-gradient(ellipse 80% 60% at 50% 45%, rgba(37, 211, 102, 0.12), transparent 70%), var(--bg-2);
+  overflow: hidden;
+}
+.ct__stage { --size: min(260px, 56vw); }
+.ct__wa-num { margin: 0; font-size: clamp(24px, 2.6vw, 34px); font-weight: 900; font-stretch: 120%; letter-spacing: -0.02em; }
+@media (hover: hover) and (pointer: fine) { .ct__wa-num a:hover { color: var(--red-hot); } }
+
+.ct__cards { display: grid; gap: 16px; }
+.ch {
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+  min-height: 300px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  transition: translate 300ms var(--ease-out), scale 160ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) { .ch:hover { translate: 0 -6px; } }
+.ch:active { scale: 0.98; }
+.ch--red { background: var(--red); color: var(--on-red); border-color: var(--red); }
+.ch--red .ch__desc { color: rgba(255, 255, 255, 0.85); }
+.ch--red .service__tag { border-color: rgba(255, 255, 255, 0.4); }
+.ch--red .btn--ghost { border-color: rgba(255, 255, 255, 0.5); color: var(--on-red); }
+@media (hover: hover) and (pointer: fine) { .ch--red .btn--ghost:hover { border-color: var(--on-red); background: rgba(255, 255, 255, 0.12); } }
+.ch__title { margin: auto 0 12px; padding-top: 40px; font-size: clamp(36px, 4.4vw, 64px); font-weight: 900; font-stretch: 120%; line-height: 0.95; text-transform: uppercase; }
+.ch__desc { margin: 0 0 24px; max-width: 520px; color: var(--muted); }
+.ch__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* ----- Redes ----- */
+.ct__socials { display: grid; gap: 16px; padding: 0 var(--gutter); }
+.soc {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.9fr) 1.1fr;
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px);
+  padding: clamp(32px, 5vw, 72px);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: radial-gradient(ellipse 60% 70% at 25% 50%, rgba(214, 36, 159, 0.16), transparent 70%),
+    radial-gradient(ellipse 70% 60% at 90% 100%, var(--red-dark), transparent 70%), var(--bg-2);
+  overflow: hidden;
+}
+.soc--tiktok { background: radial-gradient(ellipse 60% 70% at 25% 50%, rgba(37, 244, 238, 0.1), transparent 70%), radial-gradient(ellipse 70% 60% at 90% 100%, var(--red-dark), transparent 70%), var(--bg-2); }
+.soc--flip .soc__stage { order: 2; }
+.soc__stage { --size: min(340px, 64vw); justify-self: center; position: relative; z-index: 1; }
+.soc__info { position: relative; z-index: 1; min-width: 0; container-type: inline-size; }
+.soc__handle {
+  margin: 0 0 16px;
+  /* --len (contacto.js) = número de letras: el usuario siempre cabe en una línea. */
+  font-size: clamp(15px, calc(100cqw / (var(--len, 10) * 0.8)), 104px);
+  font-weight: 900;
+  font-stretch: 125%;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+}
+.soc__text { margin: 0 0 28px; max-width: 440px; color: var(--muted); font-size: 18px; }
+.soc__ghost {
+  position: absolute;
+  right: -2%;
+  bottom: -6%;
+  font-size: clamp(110px, 22vw, 360px);
+  font-weight: 900;
+  font-stretch: 125%;
+  letter-spacing: -0.06em;
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 228, 222, 0.08);
+  pointer-events: none;
+}
+
+/* ===== Logo 3D =====
+   .i3d__obj gira con --rx/--ry (flotar, CSS) + --px/--py (mouse y vuelta, contacto.js).
+   Las capas .i3d__slab forman el grosor; .i3d__glyph sobresale del frente. */
+@property --rx { syntax: "<angle>"; inherits: true; initial-value: 0deg; }
+@property --ry { syntax: "<angle>"; inherits: true; initial-value: 0deg; }
+
+.i3d {
+  --size: 240px;
+  --step: calc(var(--size) / 150);
+  --round: 27%;
+  position: relative;
+  width: var(--size);
+  aspect-ratio: 1;
+  perspective: calc(var(--size) * 4);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.i3d__obj {
+  --px: 0deg;
+  --py: 0deg;
+  --gx: 50%;
+  --gy: 30%;
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateX(calc(var(--rx) + var(--px))) rotateY(calc(var(--ry) + var(--py)));
+  animation: i3d-float 7s ease-in-out infinite;
+}
+@keyframes i3d-float {
+  0%, 100% { --rx: 10deg; --ry: -16deg; translate: 0 0; }
+  50% { --rx: 4deg; --ry: 14deg; translate: 0 -4%; }
+}
+.i3d__slab, .i3d__face, .i3d__glyph { position: absolute; inset: 0; border-radius: var(--round); }
+.i3d__slab {
+  background: var(--fill);
+  transform: translateZ(calc(var(--k) * var(--step) * -1));
+  filter: brightness(calc(0.62 - var(--k) * 0.014));
+}
+.i3d__face {
+  transform-style: preserve-3d;
+  background:
+    radial-gradient(circle at var(--gx) var(--gy), rgba(255, 255, 255, 0.42), transparent 46%),
+    var(--fill);
+  box-shadow: inset 0 calc(var(--step) * 2) 0 rgba(255, 255, 255, 0.35), inset 0 calc(var(--size) * -0.06) calc(var(--size) * 0.12) rgba(0, 0, 0, 0.28);
+  backface-visibility: hidden;
+}
+.i3d__glyph {
+  display: grid;
+  place-items: center;
+  color: var(--glyph-side, #d8cfd4);
+  transform: translateZ(calc(var(--k) * var(--step)));
+  backface-visibility: hidden;
+}
+.i3d__glyph svg { width: 66%; height: 66%; }
+.i3d__glyph--top { color: #fff; filter: drop-shadow(0 0 calc(var(--size) * 0.03) rgba(255, 255, 255, 0.35)); }
+.i3d__floor {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: -16%;
+  height: 16%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, var(--glow, rgba(227, 18, 11, 0.6)), transparent 70%);
+  filter: blur(calc(var(--size) * 0.05));
+  animation: i3d-shadow 7s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes i3d-shadow { 50% { scale: 0.85; opacity: 0.7; } }
+
+/* Colores de cada red */
+.i3d--instagram {
+  --fill: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+  --glyph-side: #f3d6e8;
+  --glow: rgba(214, 36, 159, 0.65);
+}
+.i3d--whatsapp {
+  --fill: linear-gradient(160deg, #5ff08f 0%, #25d366 45%, #0f9d4b 100%);
+  --glyph-side: #d6f5e1;
+  --glow: rgba(37, 211, 102, 0.5);
+}
+.i3d--tiktok {
+  --fill: linear-gradient(150deg, #2a2a2e 0%, #050505 70%);
+  --glyph-side: #25f4ee;
+  --glow: rgba(254, 44, 85, 0.55);
+}
+.i3d--tiktok .i3d__glyph--top { filter: drop-shadow(calc(var(--step) * -1.2) 0 0 #25f4ee) drop-shadow(calc(var(--step) * 1.2) 0 0 #fe2c55); }
+
+/* ----- Responsive ----- */
+@media (max-width: 900px) {
+  .ct__grid { grid-template-columns: 1fr; }
+  .soc { grid-template-columns: 1fr; text-align: left; }
+  .soc--flip .soc__stage { order: 0; }
+  .soc__stage { margin: 8px 0 24px; }
+}
+@media (max-width: 760px) {
+  .ch { padding: 24px; min-height: 0; }
+  .ch__title { padding-top: 28px; }
+  .ch__actions .btn { flex: 1 1 auto; }
+  .soc__text { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .i3d__obj, .i3d__floor { animation: none; }
+  .i3d__obj { --rx: 10deg; --ry: -16deg; }
+}

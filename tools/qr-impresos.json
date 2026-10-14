@@ -1,0 +1,18 @@
+{
+  "nota": "Rutas con QR. Se agregan solas y no se borran solas: cada una tiene que seguir funcionando. Si despegaste un QR del local para siempre, puedes borrar su línea.",
+  "rutas": [
+    "/carta",
+    "/reservar",
+    "/vip",
+    "/hookah",
+    "/cumple",
+    "/resena",
+    "/m/vip1",
+    "/m/vip2",
+    "/m/mesa1",
+    "/m/mesa2",
+    "/m/mesa3",
+    "/m/mesa4",
+    "/m/barra"
+  ]
+}

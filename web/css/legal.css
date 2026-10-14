@@ -1,0 +1,40 @@
+/* Páginas de texto: política de privacidad y 404. */
+.doc { max-width: 760px; margin: 0 auto; padding: 150px var(--gutter) 80px; }
+.doc__title {
+  margin: 0 0 12px;
+  font-size: clamp(40px, 7vw, 84px);
+  font-weight: 900;
+  font-stretch: 125%;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+.doc__title em { font-style: normal; color: var(--red); }
+.doc__meta { margin: 0 0 48px; color: var(--muted); font-size: 14px; }
+.doc h2 { margin: 44px 0 12px; font-size: 22px; font-weight: 800; letter-spacing: -0.01em; }
+.doc p, .doc li { color: var(--muted); font-size: 16px; line-height: 1.7; }
+.doc p { margin: 0 0 14px; }
+.doc ul { margin: 0 0 14px; padding-left: 20px; }
+.doc strong { color: var(--text); font-weight: 600; }
+.doc a:not(.btn) { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) { .doc a:not(.btn):hover { color: var(--red-hot); } }
+
+.lost { min-height: 100vh; min-height: 100svh; display: grid; place-content: center; gap: 28px; padding: 120px var(--gutter) 60px; text-align: center; }
+.lost__code {
+  margin: 0;
+  font-size: clamp(120px, 30vw, 360px);
+  font-weight: 900;
+  font-stretch: 125%;
+  letter-spacing: -0.06em;
+  line-height: 0.8;
+  color: var(--red);
+}
+.lost__text { margin: 0 auto; max-width: 420px; color: var(--muted); font-size: 18px; }
+.lost__actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+/* 404: el cero es el signo del logo, que se mece como buscando la página */
+.lost__sign { display: inline-block; color: var(--text); transform-origin: 50% 85%; animation: lost-sway 3.2s var(--ease-in-out, ease-in-out) infinite; }
+@keyframes lost-sway { 0%, 100% { rotate: -8deg; } 50% { rotate: 8deg; } }
+.lost__home { flex-basis: 100%; margin-top: 6px; color: var(--muted); font-weight: 700; text-decoration: underline; text-underline-offset: 0.25em; min-height: 44px; display: inline-grid; place-items: center; }
+@media (hover: hover) { .lost__home:hover { color: var(--text); } }
+@media (prefers-reduced-motion: reduce) { .lost__sign { animation: none; } }

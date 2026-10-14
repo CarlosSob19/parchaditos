@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Códigos QR | Parchaditos</title>
+  <meta name="theme-color" content="#0a0606">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%23e3120b%27/%3E%3Ctext x=%2732%27 y=%2746%27 text-anchor=%27middle%27 font-family=%27Arial Black,Arial%27 font-weight=%27900%27 font-size=%2740%27 fill=%27%230a0606%27%3EP%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/qr.css?v=20261006172043">
+</head>
+<body>
+  <!-- Página interna: no tiene enlaces desde el sitio. Sirve para imprimir los QR del local. -->
+  <header class="qh no-print">
+    <div>
+      <p class="qh__eyebrow">Herramienta interna</p>
+      <h1 class="qh__title">Códigos QR</h1>
+      <p class="qh__lead">Los QR apuntan a rutas cortas (<code>/m/vip1</code>, <code>/carta</code>…). El destino se cambia en <code>_redirects</code> sin reimprimir.</p>
+    </div>
+    <div class="qh__controls">
+      <label class="field">
+        <span>Dominio de la web</span>
+        <input id="domain" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://parchaditos.com">
+      </label>
+      <p class="qh__warn" id="domainWarn" hidden>Escribe el dominio real antes de imprimir: con <b>localhost</b> los QR no abren en otros celulares.</p>
+      <button class="qbtn" type="button" id="print">Imprimir seleccionados</button>
+    </div>
+  </header>
+
+  <main class="qmain">
+    <section class="qsec" data-sec="mesas">
+      <div class="qsec__head no-print">
+        <h2>Mesas</h2>
+        <p>Un QR por mesa. Abre la web en modo mesa: pedir, otra ronda, mesero, cuenta y hookah. Las mesas se editan en <code>TABLES</code> de <code>js/config.js</code>.</p>
+        <label class="check"><input type="checkbox" data-print="mesas" checked> Incluir al imprimir</label>
+      </div>
+      <div class="qgrid" id="gridMesas"></div>
+    </section>
+
+    <section class="qsec" data-sec="local">
+      <div class="qsec__head no-print">
+        <h2>Local, flyers y redes</h2>
+        <p>Para la entrada, la barra, la cuenta y los flyers.</p>
+        <label class="check"><input type="checkbox" data-print="local" checked> Incluir al imprimir</label>
+      </div>
+      <div class="qgrid" id="gridLocal"></div>
+    </section>
+
+    <section class="qsec" data-sec="wifi">
+      <div class="qsec__head no-print">
+        <h2>Wi-Fi para clientes</h2>
+        <p>El celular se conecta solo al escanearlo. La clave no se guarda en ningún lado: solo queda en el papel.</p>
+        <div class="wifi">
+          <label class="field"><span>Nombre de la red</span><input id="wifiName" autocomplete="off" spellcheck="false" placeholder="Parchaditos Clientes"></label>
+          <label class="field"><span>Clave</span><input id="wifiPass" autocomplete="off" spellcheck="false"></label>
+          <label class="field"><span>Seguridad</span>
+            <select id="wifiType"><option value="WPA">WPA / WPA2</option><option value="WEP">WEP</option><option value="nopass">Sin clave</option></select>
+          </label>
+        </div>
+        <label class="check"><input type="checkbox" data-print="wifi"> Incluir al imprimir</label>
+      </div>
+      <div class="qgrid" id="gridWifi"></div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js" integrity="sha384-lQXOAyZwHXE55JFyrOMB7nY2Wv+m5ZWNtJcHrd1rceRQXAYNLak8ukN5TjBTcIwz" crossorigin="anonymous"></script>
+  <script src="js/config.js?v=20261006172043"></script>
+  <script src="js/qr.js?v=20261006172043"></script>
+</body>
+</html>
